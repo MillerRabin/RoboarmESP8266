@@ -45,6 +45,8 @@ void handleRoot() {
     unsigned int val = server.arg(i).toInt();
     setEngine(server.argName(i), val);    
   }
+  
+  server.sendHeader("Access-Control-Allow-Origin",  "*");   
   server.send(200, "text/plain", "success");
   digitalWrite(led, 0);
 }
@@ -62,6 +64,7 @@ void handleNotFound(){
   for (uint8_t i=0; i<server.args(); i++){
     message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
   }
+  server.sendHeader("Access-Control-Allow-Origin",  "*");   
   server.send(404, "text/plain", message);
   digitalWrite(led, 0);
 }
